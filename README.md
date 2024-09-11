@@ -24,6 +24,8 @@
   - `cargo install bob-nvim`
 - Install `nvim`
   - `bob install stable`
+  - Add `nvim` to PATH
+    - `export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"`
 
 ### Install Config
 

@@ -713,9 +713,31 @@ require('lazy').setup({
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'InsertEnter',
+    keys = {
+      {
+        '<leader>tc',
+        mode = 'n',
+        function()
+          require('copilot.suggestion').toggle_auto_trigger()
+        end,
+        desc = '[T]oggle [C]opilot Suggestion',
+      },
+    },
     opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        debounce = 75,
+        keymap = {
+          accept = '<M-y>',
+          accept_word = '<M-k>',
+          accept_line = '<M-l>',
+          next = '<M-n>',
+          prev = '<M-p>',
+          dismiss = '<M-e>',
+        },
+      },
+      -- panel = { enabled = false },
       filetypes = {
         markdown = true,
         help = true,
@@ -728,11 +750,11 @@ require('lazy').setup({
     event = 'InsertEnter',
     dependencies = {
       -- Copilot cmp
-      {
-        'zbirenbaum/copilot-cmp',
-        dependencies = 'copilot.lua',
-        opts = {},
-      },
+      -- {
+      --   'zbirenbaum/copilot-cmp',
+      --   dependencies = 'copilot.lua',
+      --   opts = {},
+      -- },
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',
@@ -837,7 +859,7 @@ require('lazy').setup({
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'copilot', group_index = 2 },
+          -- { name = 'copilot', group_index = 2 },
           { name = 'nvim_lsp', group_index = 2 },
           { name = 'luasnip', group_index = 2 },
           { name = 'path', group_index = 2 },

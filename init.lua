@@ -792,14 +792,6 @@ require('lazy').setup({
         end,
         desc = '[T]oggle [C]opilot Suggestion',
       },
-      {
-        '<leader>sc',
-        mode = 'n',
-        function()
-          require('copilot.panel').open {}
-        end,
-        desc = '[S]earch [C]opilot Panel',
-      },
     },
     opts = {
       suggestion = {
@@ -813,15 +805,6 @@ require('lazy').setup({
           next = '<A-n>',
           prev = '<A-p>',
           dismiss = '<A-e>',
-        },
-      },
-      panel = {
-        enabled = true,
-        keymap = {
-          jump_prev = '<A-p>',
-          jump_next = '<A-n>',
-          accept = '<A-y>',
-          refresh = 'gr',
         },
       },
       filetypes = {

@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -673,15 +673,15 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+        pyright = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -773,6 +773,60 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+    },
+  },
+
+  -- Copilot setup
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    build = ':Copilot auth',
+    keys = {
+      {
+        '<leader>tc',
+        mode = 'n',
+        function()
+          require('copilot.suggestion').toggle_auto_trigger()
+        end,
+        desc = '[T]oggle [C]opilot Suggestion',
+      },
+      {
+        '<leader>sc',
+        mode = 'n',
+        function()
+          require('copilot.panel').open {}
+        end,
+        desc = '[S]earch [C]opilot Panel',
+      },
+    },
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        debounce = 75,
+        keymap = {
+          accept = '<A-y>',
+          accept_word = '<A-k>',
+          accept_line = '<A-l>',
+          next = '<A-n>',
+          prev = '<A-p>',
+          dismiss = '<A-e>',
+        },
+      },
+      panel = {
+        enabled = true,
+        keymap = {
+          jump_prev = '<A-p>',
+          jump_next = '<A-n>',
+          accept = '<A-y>',
+          refresh = 'gr',
+        },
+      },
+      filetypes = {
+        markdown = true,
+        help = true,
       },
     },
   },
@@ -941,7 +995,7 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
@@ -979,6 +1033,18 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+
+  -- File Explorer
+  {
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {
+        columns = { 'icon' },
+      }
+      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+    end,
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

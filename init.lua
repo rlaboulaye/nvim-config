@@ -733,6 +733,26 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- Configure ts_ls formatting settings using Neovim 0.11+ API
+      vim.lsp.config('ts_ls', {
+        settings = {
+          typescript = {
+            format = {
+              convertTabsToSpaces = true,
+              indentSize = 2,
+              tabSize = 2,
+            },
+          },
+          javascript = {
+            format = {
+              convertTabsToSpaces = true,
+              indentSize = 2,
+              tabSize = 2,
+            },
+          },
+        },
+      })
     end,
   },
 
@@ -1058,6 +1078,9 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
+  },
+  rocks = {
+    enabled = false,
   },
 })
 

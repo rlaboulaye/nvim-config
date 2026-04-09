@@ -723,41 +723,41 @@ require('lazy').setup({
   },
 
   -- Copilot setup
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    build = ':Copilot auth',
-    keys = {
-      {
-        '<leader>tc',
-        mode = 'n',
-        function()
-          require('copilot.suggestion').toggle_auto_trigger()
-        end,
-        desc = '[T]oggle [C]opilot Suggestion',
-      },
-    },
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = false,
-        debounce = 75,
-        keymap = {
-          accept = '<A-y>',
-          accept_word = '<A-k>',
-          accept_line = '<A-l>',
-          next = '<A-n>',
-          prev = '<A-p>',
-          dismiss = '<A-e>',
-        },
-      },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
-  },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   build = ':Copilot auth',
+  --   keys = {
+  --     {
+  --       '<leader>tc',
+  --       mode = 'n',
+  --       function()
+  --         require('copilot.suggestion').toggle_auto_trigger()
+  --       end,
+  --       desc = '[T]oggle [C]opilot Suggestion',
+  --     },
+  --   },
+  --   opts = {
+  --     suggestion = {
+  --       enabled = true,
+  --       auto_trigger = false,
+  --       debounce = 75,
+  --       keymap = {
+  --         accept = '<A-y>',
+  --         accept_word = '<A-k>',
+  --         accept_line = '<A-l>',
+  --         next = '<A-n>',
+  --         prev = '<A-p>',
+  --         dismiss = '<A-e>',
+  --       },
+  --     },
+  --     filetypes = {
+  --       markdown = true,
+  --       help = true,
+  --     },
+  --   },
+  -- },
 
   { -- Autocompletion
     'saghen/blink.cmp',
